@@ -36,7 +36,7 @@ const userController = {
     },
 
     createUser({ body }, res) {
-        User.crteate(body)
+        User.create(body)
         .then(dbUserData => res.json(dbUserData))
         .catch(err => res.json(err));
     },
@@ -54,9 +54,9 @@ const userController = {
     },
 
     deleteUser({ params }, res) {
-        Thought.deleteMany({ userId: params.id })
+        Thought.deleteMany({ _id: params.id })
         .then(() => {
-            User.findOneAndDelete({ userId: params.id })
+            User.findOneAndDelete({ _id: params.id })
             .then(dbUserData => {
                 if(!dbUserData) {
                     res.status(404).json({ message: 'No User found with this id'});
